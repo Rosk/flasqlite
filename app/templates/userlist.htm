@@ -1,0 +1,40 @@
+{% extends "layout.htm" %}
+
+{% block adminmenu %}
+    {% if session['user_status'] == 1 %}
+        <div class="container">
+            <strong>
+                <nav>
+                    <ul class="menu">
+                        <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                        <li><a href="{{ url_for('user_list') }}">User</a></li>
+                    </ul>
+                </nav>
+            </strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="jumbo">
+    <h2>Registrierte Benutzer</h2>
+    <ul class=userlist>
+        {% for user in users %}
+            <li class="user"><p>
+                [{{ user.user_id}}]
+                <strong>{{ user.user_name }}</strong> |
+                Status: <strong>{{ user.user_status }}</strong> |
+                Punkte: <strong>{{ user.user_points }}</strong> |
+                Email: <strong>{{ user.user_email }}</strong> |
+                Land: <strong>{{ user.user_land }}</strong>
+                </li>
+                {% else %}
+            <li><em>Es gibt noch keinen Benutzer in der Datenbank</em></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block footnfo %}
+    Userlist
+{% endblock %}

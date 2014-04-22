@@ -1,0 +1,45 @@
+{% extends "layout.htm" %}
+{% block content %}
+    <div class="jumbo" xmlns="http://www.w3.org/1999/html">
+    <h2>Account erstellen</h2>
+    {% if error %}
+        <div class=error>
+            <strong>Ihre Eingabe erhält Fehler und konnte nicht ausgeführt werden!</strong><br/>
+            <span class=reason> {{ error }}</span>
+        </div>
+    {% endif %}
+
+    <p>Registrieren Sie sich für die App!</p>
+        <div class="signin">
+            <form action="" method=post>
+                <dl>
+                    Name:</br>
+                    <input type=text name=username size=30 value="{{ request.form.username }}">
+                    <hr/>
+                    E-Mail:</br>
+                    <input type=text name=email size=30 value="{{ request.form.email }}"></br>
+                    <hr/>
+                    Passwort:</br>
+                    <input type=password name=password size=30></br>
+                    <hr/>
+                    Passwort: <small>(2x)</small></br>
+                    <input type=password name=password2 size=30></br>
+                    <hr/>
+                    Land:</br>
+                    <select name="land" size="3">
+                        <option>Deutschland</option>
+                        <option>Schweiz</option>
+                        <option>Österreich</option>
+                        <option>Niedelrande</option>
+                        <option>Luxemburg</option>
+                    </select>
+                </dl>
+                <div class=actions><input type=submit value="Registrieren"></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnfo %}
+    Registrieren
+{% endblock %}

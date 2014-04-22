@@ -1,0 +1,28 @@
+{% extends "layout.htm" %}
+
+{% block adminmenu %}
+    {% if session['user_status'] == 1 %}
+        <div class="container">
+            <strong>
+                <nav>
+                    <ul class="menu">
+                        <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                        <li><a href="{{ url_for('user_list') }}">User</a></li>
+                    </ul>
+                </nav>
+            </strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbo" style="background-color: {{ hex }}">
+        <h2>Anleitung</h2>
+        <p>Hier ist ein Anleitungstext über die App</p>
+        <p>{{ items }}</p>
+    </div>
+{% endblock %}
+
+{% block footnfo %}
+    Über diese App
+{% endblock %}

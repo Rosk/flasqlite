@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Swatcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <script type=text/javascript src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1 class="logo"><a href="{{ url_for('home') }}">FlaskSqlite</a><span class="subline">Ein einfaches Login-System</span></h1>
+        <strong>
+        <nav>
+            <ul class="menu">
+                {% if session['user_status'] == 1 %}
+                    <!-- Wenn eingeloggt als Standarbenutzer -->
+                    <li><a href="{{ url_for('userinfo') }}">Hallo {{ session["user_name"] }}!</a></li>
+                    <li><a href="{{ url_for('logout') }}">LogOut</a></li>
+                {% endif %}
+                {% if session['user_status'] == 2 %}
+                    <!-- Wenn eingeloggt als Admin -->
+                    <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                    <li><a href="{{ url_for('user_list') }}">Userliste</a></li>
+                    <li><a href="{{ url_for('logout') }}">LogOut</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                {% if not session['user_status'] %}
+                    <!-- Wenn nicht eingeloggt -->
+                    <li><a href="{{ url_for('login') }}">LogIn</a></li>
+                    <li><a href="{{ url_for('register') }}">SignIn</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        </strong>
+    </div>
+    {% block adminmenu %}
+    {% endblock %}
+</header>
+
+<section class="container">
+    <!-- prompt Flash-Messages -->
+    {% with flashes = get_flashed_messages(with_categories=true) %}
+        {% if flashes %}
+         <div class=hinweis>
+            <ul class=flashes>
+                {% for category, message in flashes %}
+                    <li class="flash {{ category }}"> {{ message.decode('utf-8') }} </li>
+                {% endfor %}
+            </ul>
+         </div>
+        {% endif %}
+    {% endwith %}
+    <!-- prompt Content -->
+    {% block content %}
+    {% endblock %}
+</section>
+
+
+<footer class="container">
+    {% block footcontent %} {% endblock %}
+    <p>
+        <strong>ROSK & FLASK | {% block footnfo %} {% endblock %} | <a href="{{ url_for('imprint') }}">Impressum</a></strong>
+        {% if g.debug %}
+            {% if g.user %}
+                <hr>
+                Sie sind mit einer Session-ID eingeloggt als <b>{{ session["user_name"] }}</b> mit der Id {{ session["user_id"] }} und dem Userstatus {{ session["user_status"] }}.<br/>
+                Aktuell haben Sie {{ session["user_points"] }} Punkte verdient. <a href="{{ url_for('userinfo') }}">Userprofil bearbeiten.</a>
+                <hr>
+                <strong>User -Debug Informationen</strong><br/>
+                {{ g.user }}
+            {% endif %}
+        {% endif %}
+    </p>
+</footer>
+</body>
+</html>

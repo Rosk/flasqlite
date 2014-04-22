@@ -1,0 +1,46 @@
+{% extends "layout.htm" %}
+
+{% block adminmenu %}
+    {% if session['user_status'] == 2 %}
+        <div class="container">
+            <strong>
+                <nav>
+                    <ul class="menu">
+                        <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                        <li><a href="{{ url_for('user_list') }}">Userliste</a></li>
+                    </ul>
+                </nav>
+            </strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbo">
+        <h2>Startseite</h2>
+        <script type=text/javascript>
+            $(function() {
+                $('a#calculate').bind('click', function() {
+                    $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+                        a: $('input[name="a"]').val(),
+                        b: $('input[name="b"]').val()
+                    }, function(data) {
+                        $("#result").text(data.ergebnis);
+                        $("#calculate").hide("slow")
+                    });
+                    return false;
+                });
+            });
+        </script>
+        <h3>jQuery Beispiel 1 - wir senden mit json an jquery</h3>
+        <p>
+            a <input type=text size=5 name=a> +
+            b <input type=text size=5 name=b> =
+            <span id=result>?</span>
+        <p><a href=# id=calculate>Berechne Serverseitig</a>
+    </div>
+{% endblock %}
+
+{% block footnfo %}
+   Welcome
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.htm" %}
+
+{% block adminmenu %}
+    {% if session['user_status'] == 2 %}
+        <div class="container">
+            <strong>
+                <nav>
+                    <ul class="menu">
+                        <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                        <li><a href="{{ url_for('user_list') }}">Userliste</a></li>
+                    </ul>
+                </nav>
+            </strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbo">
+        <h2>Administration</h2>
+        <p>Die Seite ist nur für Adminstratoren sichtbar und hat den Dekorator @admin_erforderlich. <br>
+            Hier erscheint eine Liste von Administrationslinks, zB. um Benutzer zu löschen, Artikel anzulegen, usw...
+        </p>
+    </div>
+{% endblock %}
+
+{% block footnfo %}
+    Adminstration
+{% endblock %}

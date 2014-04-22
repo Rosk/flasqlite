@@ -1,0 +1,16 @@
+{% extends "layout.htm" %}
+
+{% block content %}
+    <div class="jumbo">
+        <h2>Userpage</h2>
+        {{ name }}
+        {{ id }}
+        {{ status }}
+        {{ email }}
+        <p></p>
+    </div>
+{% endblock %}
+
+{% block footnfo %}
+    Nur eingeloggte Benutzer
+{% endblock %}

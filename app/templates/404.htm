@@ -1,0 +1,7 @@
+{% extends "layout.htm" %}
+{% block title %}Page Not Found{% endblock %}
+{% block content %}
+    <h1>404 - Die Seite wurde nicht gefunden - 404</h1>
+    <p>Was Sie suchen ist einfach nicht hier. Mysteriös aber wahr. Vermutlich gibt es die Seite einfach nicht.
+    <p><a href="{{ url_for('home') }}">Zur Startseite?</a>
+{% endblock %}

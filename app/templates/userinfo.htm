@@ -1,0 +1,51 @@
+{% extends "layout.htm" %}
+
+{% block adminmenu %}
+    {% if session['user_status'] == 2 %}
+        <div class="container">
+            <strong>
+                <nav>
+                    <ul class="menu">
+                        <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                        <li><a href="{{ url_for('user_list') }}">User</a></li>
+                    </ul>
+                </nav>
+            </strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if session['user_edit'] == True %}
+    <div class="jumbo">
+        <h2>Useraccount - eingeloggt als {{ name }}</h2>
+        <p><i>Heute: {{ tag }}.{{ monat }}.{{ jahr }}</i></p>
+        Name: {{ g.user['user_name'] }}
+        <hr/>
+        Email: {{ g.user['user_email'] }}
+        <hr/>
+        Land: {{ g.user['user_land'] }}
+        <hr/>
+        Punkte: {{ punkte }}
+        <hr/>
+        <a href="{{ url_for('home') }}">bearbeiten</a>
+    </div>
+    {% else %}
+        <div class="jumbo">
+        <form action="/edituser/{{ g.user['user_id'] }}" method=post>
+            <h2>Useraccount "{{ name }}" bearbeiten</h2>
+            Name: <input name="user_name" size="25" value="{{ name }}">
+            <hr/>
+            Email:<input name="user_email" size="25" value="{{ g.user['user_email'] }}">
+            <hr/>
+            Land: <input name="user_land" size="25" value="{{ g.user['user_land'] }}">
+            <hr/>
+            <div class=actions><input type=submit value="Aktualisieren"></div>
+        </form>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block footnfo %}
+    Nur eingeloggte Benutzer
+{% endblock %}

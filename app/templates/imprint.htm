@@ -1,0 +1,31 @@
+{% extends "layout.htm" %}
+
+{% block adminmenu %}
+    {% if session['user_status'] == 2 %}
+        <div class="container">
+            <strong>
+                <nav>
+                    <ul class="menu">
+                        <li><a href="{{ url_for('admininfo') }}">Admininistrator</a></li>
+                    </ul>
+                </nav>
+            </strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if session['user_status'] %}
+        <div class="jumbo">
+            <h2>Impressum - eingeloggt mit der ID {{ id }}</h2>
+        </div>
+    {% else %}
+        <div class="jumbo">
+            <h2>Impressum - nicht eingeloggt</h2>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block footnfo %}
+    Impressum
+{% endblock %}

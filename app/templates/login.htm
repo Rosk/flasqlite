@@ -1,0 +1,31 @@
+{% extends "layout.htm" %}
+{% block content %}
+    <div class="jumbo" xmlns="http://www.w3.org/1999/html">
+        <h2>Account einloggen</h2>
+
+        {% if error %}
+            <div class=error>
+            <strong>Ihre Eingabe ergibt einen Fehler und konnte nicht ausgeführt werden.</strong><br/>
+            <span class=reason> {{ error }}</span>
+            </div>
+        {% endif %}
+
+        <p>Hier können sie sich mit Ihrem Account einloggen.</p>
+
+        <div class=login>
+            <form action="" method=post>
+                    Benutzename:</br>
+                    <input type=text name=username size=30 value="{{ request.form.username }}">
+                <hr/>
+                    Passwort:</br>
+                    <input type=password name=password size=30>
+                <hr/>
+                <div class=actions><input type=submit value="Jetzt einloggen"></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footnfo %}
+    Einloggen
+{% endblock %}
