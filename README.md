@@ -12,7 +12,5 @@ Flasqlite - Features:
 - Custom 404 pages
 - Sessions Variables
 - jsonify als Schnittstelle für ajax / python
-- 
 
-=========
 
