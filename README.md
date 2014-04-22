@@ -9,12 +9,12 @@ Eine rohe Skelett-WebApp auf Basis von Python Flask, Jinja und Sqlite als Ausgan
 =========
 
 ## Flasqlite - Features:
+
 - sqlite db in schema.sql
 - userlogin / logout / Dublettenprüfung / password hash / Längenprüfung
 - Custom 404 pages
 - Sessions Variables
 - jsonify als Schnittstelle für ajax / python
-- 
 
 
 ### Anwendung:
