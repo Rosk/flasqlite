@@ -17,13 +17,17 @@ from app import app, ensure_dir
 SECRET_KEY = 'lfhjk5h3l5jh345XD#*'
 DATABASE = 'flaskSqlite.db'
 
+# APP vars
+app.title = "FlaskSqlite"
 app.secret_key = SECRET_KEY
 app.debug = True
-app.title = "FlaskSqlite"
-app.port = 6061
 app.database = DATABASE
 
-uploadFolder = "/home/rosk/Arbeitsfläche/" + app.title + "Uploads/"
+# Bitte anpassen
+app.port = 6061
+app.home = "/home/rosk/Arbeitsfläche/"
+
+uploadFolder = app.home + app.title + "Uploads/"
 
 # App starten
 
