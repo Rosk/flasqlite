@@ -133,16 +133,18 @@ def register():
         elif users.get_user_id(request.form['username']) is not None:
             error = 'Den Benutzernamen gibt es bereits in der Datenbank'
 
+        # wenn es keine Fehler gibt, versuchen wir uns mit der DB zu verbinden
         else:
             db = connect_db()
             db.execute('''insert into user (
-              user_name, user_email, user_pw_hash, user_land, user_points, user_status) values (?, ?, ?, ?, ?, ?)''',
+                user_name, user_email, user_pw_hash, user_land, user_points, user_status) values (?, ?, ?, ?, ?, ?)''',
                        [request.form['username'], request.form['email'],
                         generate_password_hash(request.form['password']),
                         request.form['land'], 0, 1])
             db.commit()
             flash('Sie sind jetzt erfolgreich registriert. Bitte loggen Sie sich mit Ihrem Account ein.', 'hinweis')
             return redirect(url_for('home'))
+
     if error is not None:
         # Utf-8 Sanitizer vor der Ausgabe
         error = error.decode('utf-8')
@@ -225,5 +227,6 @@ def edit_user(userId):
         flash('Ihr Profil wurde aktualisiert', 'hinweis')
     return redirect(url_for('userinfo'))
 
-    # Falls die Datenbank noch nicht exisiteiert muß sie einmal initialisert werden
-    # init_db()
+
+# Falls die Datenbank noch nicht exisitiert muß sie einmal initialisert werden
+# init_db()

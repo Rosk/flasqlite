@@ -17,3 +17,13 @@ create table comment (
   comment_text text not null,
   comment_time text not null
 );
+
+drop table if exists messages;
+create table messages (
+  msg_id integer primary key autoincrement,
+  msg_from integer not null,
+  msg_to integer not null,
+  msg_title text not null,
+  msg_body text not null,
+  msg_isread integer default 0 not null
+);
